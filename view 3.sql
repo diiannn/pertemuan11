@@ -1,13 +1,5 @@
-use jastip_skincare
-SELECT 
-    kp.id_karyawan,
-    k.nama AS nama_karyawan,
-    p.nama_produk,
-    p.kategori,
-    p.harga_jual
-FROM 
-    Karyawan_Produk kp
-JOIN 
-    Karyawan k ON kp.id_karyawan = k.id_karyawan
-JOIN 
-    Produk p ON kp.id_produk = p.id_produk;
+CREATE VIEW total_pembayaran AS
+SELECT t.id_transaksi, t.tgl_transaksi, SUM(d.Total_harga) AS total_pembayaran
+FROM Transaksi t
+JOIN Detail_Transaksi d ON t.id_transaksi = d.id_detailtransaksi
+GROUP BY t.id_transaksi, t.tgl_transaksi;
